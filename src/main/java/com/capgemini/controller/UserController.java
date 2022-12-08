@@ -37,21 +37,6 @@ public class UserController {
 		return "User Home";
 	}
 	
-	//1.Login Related Activities--->
-	
-	@PostMapping(path="/register", consumes="application/json")
-	public User registerUser(@RequestBody User user){
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		user.setRole("ROLE_NORMAL");
-		return loginService.addUser(user);
-	}
-	@DeleteMapping("/deleteUser/{id}")
-	public String deleterUser(@PathVariable int id){
-		if(loginService.removeUser(id)!=null) {
-			throw new UnsuccessfulDeletionException("Oops , deletion unsuccessfull");
-		}
-		return "User Deleted";
-	}
 	
 	//2.Customer Related Activities-->
 	
