@@ -4,6 +4,7 @@ import com.capgemini.jwthelper.JwtUtil;
 import com.capgemini.jwthelper.model.JwtRequest;
 import com.capgemini.jwthelper.model.JwtResponse;
 import com.capgemini.service.CustomerUserDetailsService;
+import com.capgemini.service.ILoginService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +32,9 @@ public class JwtController {
 
     @Autowired
     private CustomerUserDetailsService customUserDetailsService;
+    
+    @Autowired
+    private ILoginService iLoginService;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -62,7 +67,9 @@ public class JwtController {
 
         //{"token":"value"}
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new JwtResponse(token +" "+ userDetails.getAuthorities()));
 
     }
+    
 }
+
