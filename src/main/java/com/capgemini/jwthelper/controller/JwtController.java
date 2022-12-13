@@ -1,11 +1,5 @@
 package com.capgemini.jwthelper.controller;
 
-import com.capgemini.jwthelper.JwtUtil;
-import com.capgemini.jwthelper.model.JwtRequest;
-import com.capgemini.jwthelper.model.JwtResponse;
-import com.capgemini.service.CustomerUserDetailsService;
-import com.capgemini.service.ILoginService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,11 +8,16 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.capgemini.jwthelper.JwtUtil;
+import com.capgemini.jwthelper.model.JwtRequest;
+import com.capgemini.jwthelper.model.JwtResponse;
+import com.capgemini.service.CustomerUserDetailsService;
+import com.capgemini.service.ILoginService;
 
 @RestController
 @CrossOrigin(origins = "*")
