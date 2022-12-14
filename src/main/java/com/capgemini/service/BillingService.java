@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.capgemini.entity.Billing;
 import com.capgemini.exception.BillNotFoundException;
+import com.capgemini.exception.ProductNotFoundException;
+import com.capgemini.exception.StockUnavailableException;
 
 public interface BillingService {
 	
@@ -11,7 +13,7 @@ public interface BillingService {
 	
 	String billCancel(Long id);
 	
-//	Billing createBill(Billing bill);
+//	Billing createBill2(Billing bill);
 
 	Billing getBillById(Long billId) throws BillNotFoundException;
 
@@ -20,6 +22,9 @@ public interface BillingService {
 	void deletBillById(Long billId) throws BillNotFoundException;
 
 	Billing updateBill(Long billId, Billing bill) throws BillNotFoundException;
+
+	Billing createBill(Billing bill, Integer productId, Integer productQuantity) throws StockUnavailableException, ProductNotFoundException;
+
 
 
 

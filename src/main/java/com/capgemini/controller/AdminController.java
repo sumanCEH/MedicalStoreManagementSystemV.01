@@ -17,15 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capgemini.dto.LoginRequest;
 import com.capgemini.entity.Billing;
-import com.capgemini.entity.Customer;
 import com.capgemini.entity.Product;
 import com.capgemini.entity.User;
 import com.capgemini.exception.ProductNotFoundException;
 import com.capgemini.exception.UnsuccessfulDeletionException;
 import com.capgemini.service.BillingService;
-import com.capgemini.service.CustomerService;
 import com.capgemini.service.ILoginService;
 import com.capgemini.service.ProductService;
 
@@ -42,8 +39,8 @@ public class AdminController {
 	private ILoginService loginService;
 	@Autowired
 	private BillingService billService;
-	@Autowired
-	private CustomerService cusService;
+//	@Autowired
+//	private CustomerService cusService;
 	@Autowired
 	private ProductService productService;
 	
@@ -187,31 +184,31 @@ public class AdminController {
 	}
 	
 	*/
+//	
+//	// Admin will do this as well as employee
+//	@GetMapping("/GetAllDetails")
+//	public ResponseEntity<List<Customer>> getCustomers(){
+//		List<Customer> lis=cusService.getAllCustomers();
+//		return new ResponseEntity<List<Customer>>(lis,HttpStatus.OK);
+//	}
 	
-	// Admin will do this as well as employee
-	@GetMapping("/GetAllDetails")
-	public ResponseEntity<List<Customer>> getCustomers(){
-		List<Customer> lis=cusService.getAllCustomers();
-		return new ResponseEntity<List<Customer>>(lis,HttpStatus.OK);
-	}
-	
-	@GetMapping("/login")
-	public ResponseEntity<String> login(@RequestParam("username")String userName,@RequestParam("password")String password){
-		LoginRequest loginRequest=new LoginRequest();
-		loginRequest.setCustomerName(userName);
-		loginRequest.setPassword(password);
-		String response=cusService.loginPage(loginRequest);
-		return new ResponseEntity<String>(response,HttpStatus.OK);
-	}
-	
-	@GetMapping("/forgot password")
-	public ResponseEntity<String> passwordReset(@RequestParam("username")String username,
-			@RequestParam("password")String password,
-			@RequestParam("resetPassword")String confirmPassword) {
-		String response = cusService.resetPassword(username,password,confirmPassword);
-		return new ResponseEntity<String>(response, HttpStatus.OK);
-	}
-
+//	@GetMapping("/login")
+//	public ResponseEntity<String> login(@RequestParam("username")String userName,@RequestParam("password")String password){
+//		LoginRequest loginRequest=new LoginRequest();
+//		loginRequest.setCustomerName(userName);
+//		loginRequest.setPassword(password);
+//		String response=cusService.loginPage(loginRequest);
+//		return new ResponseEntity<String>(response,HttpStatus.OK);
+//	}
+//	
+//	@GetMapping("/forgot password")
+//	public ResponseEntity<String> passwordReset(@RequestParam("username")String username,
+//			@RequestParam("password")String password,
+//			@RequestParam("resetPassword")String confirmPassword) {
+//		String response = cusService.resetPassword(username,password,confirmPassword);
+//		return new ResponseEntity<String>(response, HttpStatus.OK);
+//	}
+//
 //product
 	/*
 	// employee will do this

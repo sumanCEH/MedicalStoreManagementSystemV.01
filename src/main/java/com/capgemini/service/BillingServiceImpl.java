@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.entity.Billing;
+import com.capgemini.entity.Product;
 import com.capgemini.exception.BillNotFoundException;
 import com.capgemini.exception.CustomerIdInvalidException;
+import com.capgemini.exception.ProductNotFoundException;
+import com.capgemini.exception.StockUnavailableException;
 import com.capgemini.repository.BillingRepository;
-import com.capgemini.repository.CustomerRepository;
+import com.capgemini.repository.ProductRepository;
 
 @Service
 @Transactional
@@ -20,8 +23,11 @@ public class BillingServiceImpl implements BillingService{
 	@Autowired
 	private BillingRepository billRepository;
 	
+//	@Autowired
+//	private CustomerRepository customerRepository;
+	
 	@Autowired
-	CustomerRepository customerRepository;
+	private ProductRepository productRepository;
 	
 	/*
 	@Override
@@ -53,14 +59,17 @@ public class BillingServiceImpl implements BillingService{
 
 	}
 	
+	
 	/*
 	@Override
-	public Billing createBill(Billing bill) {
+	public Billing createBill2(Billing bill) {
 		return billRepository.save(bill);
 
 	}
 	*/
-
+	
+	
+	
 	@Override
 	public Billing getBillById(Long billId) throws BillNotFoundException {
 		Optional<Billing> bill = billRepository.findById(billId);
@@ -108,6 +117,32 @@ public class BillingServiceImpl implements BillingService{
 		
 		
 	}
+
+	@Override
+	public Billing createBill(Billing bill, Integer productId, Integer productQuantity) throws StockUnavailableException, ProductNotFoundException {
+		Optional<Product> _product = productRepository.findById(productId);
+		
+		if(_product.isPresent()) {
+			if(productQuantity<=_product.get().getProductQuantity()) {
+				long totalAmt = bill.getTotalAmount();
+				totalAmt+= _product.get().getProductPrice()*productQuantity;
+				bill.setTotalAmount(totalAmt);
+				_product.get().setProductQuantity(productQuantity);
+				_product.get().setProductQuantity(_product.get().getProductQuantity() - productQuantity);
+				bill.addProduct(_product.get());
+				billRepository.save(bill);
+				return bill;
+				
+			}
+			else {
+				throw new StockUnavailableException("Sorry! Product is not available in stock");
+			}
+		}
+		else {
+			throw new ProductNotFoundException("Product not found with productId " + productId + "in our stock");
+		}
+	}
+
 
 	
 

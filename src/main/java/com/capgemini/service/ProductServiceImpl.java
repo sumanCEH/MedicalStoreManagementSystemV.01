@@ -115,6 +115,9 @@ public class ProductServiceImpl implements ProductService{
 	public void deleteProductFromBill(Long billId, Integer productId) throws BillNotFoundException {
 		Optional<Billing> bill = billRepository.findById(billId);
 		
+//		Optional<Product> product = productRepository.findById(productId);
+		
+		
 		if(bill.isPresent()) {
 			bill.get().removeProduct(productId);
 			billRepository.save(bill.get());

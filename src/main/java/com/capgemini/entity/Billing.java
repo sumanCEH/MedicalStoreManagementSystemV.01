@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -37,14 +36,26 @@ public class Billing {
 
 	@NotBlank(message = "Address should not be blank")
 	private String address;
-
+	
+	@NotBlank(message = "Name should not be blank")
+	private String customerName;
+	
+	@NotBlank(message = "Phone should not be blank")
+	private String phoneNo;
+	
+	@NotBlank(message = "Age should not be blank")
+	private String age;
+	
+	@NotBlank(message = "Sex should not be blank")
+	private String sex;
+	
 	@NotNull(message = "Amount should not be blank")
 	private Long totalAmount;
 
-	@OneToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "CUSTOMERID")
-	// @NotBlank(message="id should not be blank")
-	private Customer customer;
+//	@OneToOne(cascade = CascadeType.MERGE)
+//	@JoinColumn(name = "CUSTOMERID")
+//	// @NotBlank(message="id should not be blank")
+//	private Customer customer;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "bill_product", joinColumns = { @JoinColumn(name = "bill_id") }, inverseJoinColumns = {
