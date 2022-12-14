@@ -127,7 +127,7 @@ public class BillingServiceImpl implements BillingService{
 				long totalAmt = bill.getTotalAmount();
 				totalAmt+= _product.get().getProductPrice()*productQuantity;
 				bill.setTotalAmount(totalAmt);
-				_product.get().setProductQuantity(productQuantity);
+//				_product.get().setProductQuantity(productQuantity);
 				_product.get().setProductQuantity(_product.get().getProductQuantity() - productQuantity);
 				bill.addProduct(_product.get());
 				billRepository.save(bill);
