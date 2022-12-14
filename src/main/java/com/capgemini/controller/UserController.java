@@ -212,6 +212,15 @@ public class UserController {
 //			String response = billService.billCancel(id);
 //			return new ResponseEntity<String>(response, HttpStatus.OK);
 //		}
+	
+	// product related
+	
+	@GetMapping("/getAllProducts")
+	public ResponseEntity<List<Product>> getAllProducts() {
+		List<Product> products = productService.getAllProducts();
+		return new ResponseEntity<>(products, HttpStatus.OK);
+
+	}
 
 	
 }

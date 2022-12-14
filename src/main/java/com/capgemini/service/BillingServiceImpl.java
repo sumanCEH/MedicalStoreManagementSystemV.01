@@ -105,6 +105,10 @@ public class BillingServiceImpl implements BillingService{
 		if(_bill.isPresent()) {
 			_bill.get().setTotalAmount(bill.getTotalAmount());
 			_bill.get().setAddress(bill.getAddress());
+			_bill.get().setAge(bill.getAge());
+			_bill.get().setCustomerName(bill.getCustomerName());
+			_bill.get().setPhoneNo(bill.getPhoneNo());
+			_bill.get().setSex(bill.getSex());
 			
 			return billRepository.save(_bill.get());
 			
