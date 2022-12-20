@@ -44,7 +44,7 @@ public class AdminController {
 	
 	@GetMapping("/index")
 	public String home(){
-		return "Admin Home Page";
+		return "Admin Home page suntu";
 	}
 	
 	@PostMapping(path="/registerAdmin", consumes="application/json")
