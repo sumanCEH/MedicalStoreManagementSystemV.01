@@ -17,17 +17,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 @Entity
 @Component
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Data
 public class Billing {
 
 	@Id
@@ -52,11 +43,6 @@ public class Billing {
 	@NotNull(message = "Amount should not be blank")
 	private Long totalAmount;
 
-//	@OneToOne(cascade = CascadeType.MERGE)
-//	@JoinColumn(name = "CUSTOMERID")
-//	// @NotBlank(message="id should not be blank")
-//	private Customer customer;
-
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "bill_product", joinColumns = { @JoinColumn(name = "bill_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "product_id") })
@@ -74,6 +60,103 @@ public class Billing {
 			product.getBills().remove(this);
 		}
 	}
+	
+	
+
+	public Billing() {
+	
+	}
+
+	public Billing(Long billId, @NotBlank(message = "Address should not be blank") String address,
+			@NotBlank(message = "Name should not be blank") String customerName,
+			@NotBlank(message = "Phone should not be blank") String phoneNo,
+			@NotBlank(message = "Age should not be blank") String age,
+			@NotBlank(message = "Sex should not be blank") String sex,
+			@NotNull(message = "Amount should not be blank") Long totalAmount, Set<Product> products) {
+		super();
+		this.billId = billId;
+		this.address = address;
+		this.customerName = customerName;
+		this.phoneNo = phoneNo;
+		this.age = age;
+		this.sex = sex;
+		this.totalAmount = totalAmount;
+		this.products = products;
+	}
+
+	public Long getBillId() {
+		return billId;
+	}
+
+	public void setBillId(Long billId) {
+		this.billId = billId;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public Long getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(Long totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+
+	@Override
+	public String toString() {
+		return "Billing [billId=" + billId + ", address=" + address + ", customerName=" + customerName + ", phoneNo="
+				+ phoneNo + ", age=" + age + ", sex=" + sex + ", totalAmount=" + totalAmount + ", products=" + products
+				+ "]";
+	}
+	
+	
+	
 
 }
 
