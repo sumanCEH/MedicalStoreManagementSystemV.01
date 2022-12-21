@@ -1,10 +1,10 @@
-package com.bootcamp.bookstoremanagement;
+package com.capgemini;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BookstoreManagementApplicationTests {
+class MedicalStoreManagementSystemTests {
 
 	@Test
 	void contextLoads() {
